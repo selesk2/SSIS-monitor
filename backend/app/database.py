@@ -1,0 +1,23 @@
+import os
+
+import pyodbc
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+
+def get_connection():
+    server = os.getenv("DB_SERVER")
+    database = os.getenv("DB_DATABASE", "msdb")
+    driver = os.getenv("DB_DRIVER", "ODBC Driver 17 for SQL Server")
+
+    connection_string = (
+        f"DRIVER={{{driver}}};"
+        f"SERVER={server};"
+        f"DATABASE={database};"
+        "Trusted_Connection=yes;"
+        "TrustServerCertificate=yes;"
+    )
+
+    return pyodbc.connect(connection_string)
