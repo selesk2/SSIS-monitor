@@ -59,10 +59,10 @@ export function SummaryCards({
             key={card.key}
             type="button"
             onClick={() => onSelectStatus(card.statusFilter)}
-            className={`rounded-lg border bg-white px-3.5 py-3 text-left shadow-panel transition-colors focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 ${
+            className={`rounded-lg border bg-white px-3.5 py-3 text-left shadow-panel transition-colors focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 ring-1 ${
               isActive
-                ? `${card.accent} ring-1 ring-sky-300`
-                : "border-surface-border hover:border-slate-300"
+                ? `${card.accent} ring-sky-300`
+                : "border-surface-border ring-transparent hover:border-slate-300"
             }`}
           >
             <div className="text-xs font-medium uppercase tracking-wide text-ink-muted">

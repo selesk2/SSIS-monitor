@@ -17,7 +17,7 @@ export function DashboardHeader({
   onRefresh,
 }: DashboardHeaderProps) {
   return (
-    <header className="flex flex-col gap-4 border-b border-surface-border pb-5 sm:flex-row sm:items-end sm:justify-between">
+    <header className="flex flex-col gap-3 border-b border-surface-border pb-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight text-ink">
           SSIS Monitoring

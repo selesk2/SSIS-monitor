@@ -236,19 +236,21 @@ export function Dashboard() {
       : (items.find((item) => itemKey(item) === selectedKey) ?? null);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-ink">
-      <div className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 lg:px-8">
-        <DashboardHeader
-          monitoringDate={data?.date ?? null}
-          lastRefresh={lastRefresh}
-          isRefreshing={isRefreshing}
-          isMockMode={isMockMode}
-          onRefresh={() => {
-            void loadMonitoring();
-          }}
-        />
+    <div className="flex h-[100dvh] flex-col overflow-hidden bg-slate-50 text-ink">
+      <div className="mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col overflow-hidden px-4 py-4 sm:px-6 lg:px-8">
+        <div className="shrink-0">
+          <DashboardHeader
+            monitoringDate={data?.date ?? null}
+            lastRefresh={lastRefresh}
+            isRefreshing={isRefreshing}
+            isMockMode={isMockMode}
+            onRefresh={() => {
+              void loadMonitoring();
+            }}
+          />
+        </div>
 
-        <main className="mt-6 space-y-4">
+        <main className="mt-4 flex min-h-0 flex-1 flex-col gap-3 overflow-hidden">
           {initialLoading && !data ? (
             <LoadingState />
           ) : error && !data ? (
@@ -259,19 +261,21 @@ export function Dashboard() {
               }}
             />
           ) : data && data.count === 0 ? (
-            <div className="rounded-lg border border-dashed border-surface-border bg-white px-6 py-16 text-center shadow-panel">
-              <p className="text-sm font-medium text-ink">
-                No monitored packages for today
-              </p>
-              <p className="mt-1 text-xs text-ink-muted">
-                There are no scheduled package occurrences in the configured
-                folders for this date.
-              </p>
+            <div className="flex min-h-0 flex-1 items-center justify-center rounded-lg border border-dashed border-surface-border bg-white px-6 py-16 text-center shadow-panel">
+              <div>
+                <p className="text-sm font-medium text-ink">
+                  No monitored packages for today
+                </p>
+                <p className="mt-1 text-xs text-ink-muted">
+                  There are no scheduled package occurrences in the configured
+                  folders for this date.
+                </p>
+              </div>
             </div>
           ) : data ? (
             <>
               {error && (
-                <div className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+                <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
                   <span>
                     Refresh failed. Showing last successful data. {error}
                   </span>
@@ -287,24 +291,28 @@ export function Dashboard() {
                 </div>
               )}
 
-              <SummaryCards
-                summary={data.summary}
-                total={data.count}
-                activeStatus={filters.status || null}
-                onSelectStatus={handleSelectStatus}
-              />
+              <div className="shrink-0">
+                <SummaryCards
+                  summary={data.summary}
+                  total={data.count}
+                  activeStatus={filters.status || null}
+                  onSelectStatus={handleSelectStatus}
+                />
+              </div>
 
-              <MonitoringFilters
-                filters={filters}
-                statuses={statuses}
-                folders={folders}
-                projects={projects}
-                jobs={jobs}
-                shownCount={filteredItems.length}
-                totalCount={data.count}
-                onChange={setFilters}
-                onClear={() => setFilters(EMPTY_FILTERS)}
-              />
+              <div className="shrink-0">
+                <MonitoringFilters
+                  filters={filters}
+                  statuses={statuses}
+                  folders={folders}
+                  projects={projects}
+                  jobs={jobs}
+                  shownCount={filteredItems.length}
+                  totalCount={data.count}
+                  onChange={setFilters}
+                  onClear={() => setFilters(EMPTY_FILTERS)}
+                />
+              </div>
 
               <MonitoringTable
                 items={filteredItems}

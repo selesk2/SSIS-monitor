@@ -118,23 +118,24 @@ export function MonitoringFilters({
         </select>
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+      <div className="mt-3 flex min-h-[28px] items-center justify-between gap-2">
         <p className="text-xs text-ink-muted">
           Showing{" "}
           <span className="font-medium text-ink">{shownCount}</span> of{" "}
           <span className="font-medium text-ink">{totalCount}</span>
         </p>
 
-        {hasActiveFilters && (
-          <button
-            type="button"
-            onClick={onClear}
-            className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-ink-muted hover:bg-surface-muted hover:text-ink"
-          >
-            <X className="h-3.5 w-3.5" aria-hidden />
-            Clear Filters
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={onClear}
+          disabled={!hasActiveFilters}
+          className={`inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-ink-muted hover:bg-surface-muted hover:text-ink ${
+            hasActiveFilters ? "" : "invisible pointer-events-none"
+          }`}
+        >
+          <X className="h-3.5 w-3.5" aria-hidden />
+          Clear Filters
+        </button>
       </div>
     </section>
   );
