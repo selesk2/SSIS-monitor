@@ -1,6 +1,7 @@
 # Python virtual environment
 backend/.venv/
 .venv/
+backend/.env
 
 # Environment variables / credentials
 # .env
